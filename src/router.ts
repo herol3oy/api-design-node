@@ -1,4 +1,6 @@
 import { Router } from "express";
+import { body } from "express-validator";
+import { handleInputErrors } from "./modules/middleware";
 
 const router = Router();
 
@@ -6,7 +8,14 @@ router.get("/product", (req, res) => {
   res.json({ msg: req.key });
 });
 router.get("/product/:id", () => {});
-router.put("/product/:id", () => {});
+
+router.put(
+  "/product/:id",
+  body("name").isString(),
+  handleInputErrors,
+  () => {}
+);
+
 router.post("/product/", () => {});
 router.delete("product/:id", () => {});
 
